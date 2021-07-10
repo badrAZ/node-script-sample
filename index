@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+const buildArgs = (value, prev) => prev.concat(value)
+
+class App {
+  method1() {
+    return 'The node script is correctly generated'
+  }
+}
+
+async function main() {
+  const program = new (require('commander').Command)()
+
+  const { method, args } = program
+    .requiredOption('-m, --method <string>', 'method')
+    .option('-a, --args <value>', 'args', buildArgs, [])
+    .parse(process.argv)
+    .opts()
+
+  const m = new App()[method]
+  if (m === undefined) {
+    throw new Error(`The method ${method} doesn't exist`)
+  }
+
+  console.log(m(...args))
+}
+
+main().catch(error => {
+  console.error(error)
+  process.exit(1)
+})
