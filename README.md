@@ -1,1 +1,5 @@
-# node-script-sample-
+# node-script-sample
+
+```sh
+yarn && yarn gen
+```
