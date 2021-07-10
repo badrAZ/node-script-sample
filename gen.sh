@@ -33,6 +33,4 @@ ln -s $lib/index $bin
 
 echo "tesing the command..."
 
-$bin -m method1 || echo "generation failed" && rm -rf $lib && rm -f $bin
-
-echo "script path: $bin"
+($bin -m method1 && echo "script path: $bin") || (echo "generation failed" && rm -rf $lib && rm -f $bin)
