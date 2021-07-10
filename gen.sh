@@ -5,6 +5,7 @@ if [[ ! $name ]]; then echo "The script name is required"; exit 1; fi
 
 lib=/usr/local/lib/$name
 bin=/usr/local/bin/$name
+dir=$(dirname $(readlink -f $0))
 
 echo "deleting old script files..."
 
@@ -17,7 +18,7 @@ mkdir $lib
 
 requiredFiles=("index" "package.json" "yarn.lock")
 for file in ${requiredFiles[@]}; do
-  cp $file $lib/
+  cp $dir/$file $lib/
 done
 
 echo "fetching dependencies..."
